@@ -18,16 +18,17 @@ import { Footer } from "@/components/lumiere/Footer";
 import { BottomNav } from "@/components/lumiere/BottomNav";
 import { ProductModal } from "@/components/lumiere/ProductModal";
 import { BagDrawer } from "@/components/lumiere/BagDrawer";
+import { WishlistDrawer } from "@/components/lumiere/WishlistDrawer";
 import { SizeGuide } from "@/components/lumiere/SizeGuide";
 
 const Page = () => {
-  const { activeProduct, bagOpen, sizeGuideOpen, activeReel } = useStore();
+  const { activeProduct, bagOpen, sizeGuideOpen, activeReel, wishlistOpen } = useStore();
   useLenis();
 
   useEffect(() => {
-    if (activeProduct || bagOpen || sizeGuideOpen || activeReel !== null) lockScroll();
+    if (activeProduct || bagOpen || sizeGuideOpen || wishlistOpen || activeReel !== null) lockScroll();
     else unlockScroll();
-  }, [activeProduct, bagOpen, sizeGuideOpen, activeReel]);
+  }, [activeProduct, bagOpen, sizeGuideOpen, activeReel, wishlistOpen]);
 
   return (
     <div className="App" data-testid="lumiere-app">
@@ -47,10 +48,12 @@ const Page = () => {
       <ReelViewer />
       <ProductModal />
       <BagDrawer />
+      <WishlistDrawer />
       <SizeGuide />
       <Toaster
         position="top-center"
-        offset={72}
+        offset={96}
+        mobileOffset={{ top: 92 }}
         toastOptions={{
           style: { background: "#111827", color: "#fff", border: "none", borderRadius: 999, fontFamily: "Inter, sans-serif", fontSize: 13 },
           descriptionClassName: "!text-white/60",

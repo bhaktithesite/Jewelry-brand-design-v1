@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { Search, ShoppingBag, X, MessageCircle } from "lucide-react";
+import { Heart, Search, ShoppingBag, X, MessageCircle } from "lucide-react";
 import { useStore } from "@/context/StoreContext";
 import { scrollTo } from "@/lib/scroll";
 import { conciergeWhatsApp } from "@/lib/whatsapp";
 
 export const Header = () => {
-  const { bagCount, setBagOpen, searchOpen, setSearchOpen, query, setQuery } = useStore();
+  const { bagCount, setBagOpen, searchOpen, setSearchOpen, query, setQuery, wishlist, setWishlistOpen } = useStore();
 
   const onSearch = (v) => {
     setQuery(v);
@@ -44,6 +44,29 @@ export const Header = () => {
             aria-label="Search"
           >
             {searchOpen ? <X size={20} /> : <Search size={20} />}
+          </button>
+          <button
+            data-testid="header-wishlist-btn"
+            onClick={() => setWishlistOpen(true)}
+            className="relative w-10 h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            aria-label="Open wishlist"
+          >
+            <Heart size={20} className={wishlist.length ? "fill-crimson text-crimson" : ""} />
+            <AnimatePresence>
+              {wishlist.length > 0 && (
+                <motion.span
+                  key={wishlist.length}
+                  data-testid="header-wishlist-count"
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 22 }}
+                  className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-ink text-white text-[10px] font-display font-bold flex items-center justify-center tabular"
+                >
+                  {wishlist.length}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </button>
           <button
             data-testid="header-bag-btn"

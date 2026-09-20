@@ -26,7 +26,7 @@ export function buyNowWhatsApp(product, metal, size) {
   return url;
 }
 
-export function checkoutBagWhatsApp(cartItems) {
+export function checkoutBagWhatsApp(cartItems, discount = 0) {
   if (!cartItems.length) return null;
 
   let listText = "";
@@ -38,6 +38,10 @@ export function checkoutBagWhatsApp(cartItems) {
     listText += `\n${idx + 1}. *${item.name}* (Qty: ${item.quantity})\n   • Finish: ${item.selectedMetal} | Size: ${item.selectedSize || 'Free Size'}\n   • Price: ₹${itemTotal.toLocaleString()}\n`;
   });
 
+  const couponLine = discount > 0
+    ? `\n• Subtotal: ₹${total.toLocaleString()}\n• Coupon LUXE10 (Buy 2, 10% OFF): -₹${discount.toLocaleString()}`
+    : "";
+
   const message =
 `🛍️ *SHOPPING BAG ORDER — LUMIÈRE DEMI-FINE* 🛍️
 ━━━━━━━━━━━━━━━━━━━━
@@ -45,8 +49,8 @@ Hi LUMIÈRE team, I would like to place an order for my bag items:
 ${listText}
 ━━━━━━━━━━━━━━━━━━━━
 📊 *Order Summary:*
-• Total Items: ${cartItems.reduce((sum, i) => sum + i.quantity, 0)}
-• Grand Total: ₹${total.toLocaleString()} INR
+• Total Items: ${cartItems.reduce((sum, i) => sum + i.quantity, 0)}${couponLine}
+• Grand Total: ₹${(total - discount).toLocaleString()} INR
 • Shipping: FREE Express Delivery
 • Guarantee: Lifetime Anti-Tarnish & Waterproof Warranty
 

@@ -11,6 +11,7 @@ export const StoreProvider = ({ children }) => {
   const [wishlist, setWishlist] = useLocalStorage("lumiere_wishlist", []);
   const [activeProduct, setActiveProduct] = useState(null);
   const [bagOpen, setBagOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
   const [activeReel, setActiveReel] = useState(null);
   const [category, setCategory] = useState("All");
@@ -45,10 +46,12 @@ export const StoreProvider = ({ children }) => {
 
   const bagCount = useMemo(() => bag.reduce((s, i) => s + i.quantity, 0), [bag]);
   const bagTotal = useMemo(() => bag.reduce((s, i) => s + i.price * i.quantity, 0), [bag]);
+  const couponApplied = bagCount >= 2;
+  const discount = couponApplied ? Math.round(bagTotal * 0.1) : 0;
 
   const value = {
-    bag, bagCount, bagTotal, addToBag, updateQty, removeFromBag,
-    wishlist, toggleWishlist, isWishlisted: (id) => wishlist.includes(id),
+    bag, bagCount, bagTotal, discount, couponApplied, addToBag, updateQty, removeFromBag,
+    wishlist, toggleWishlist, isWishlisted: (id) => wishlist.includes(id), wishlistOpen, setWishlistOpen,
     activeProduct, openProduct: setActiveProduct, closeProduct: () => setActiveProduct(null),
     bagOpen, setBagOpen, sizeGuideOpen, setSizeGuideOpen, activeReel, setActiveReel,
     category, setCategory, tab, setTab, query, setQuery, searchOpen, setSearchOpen,

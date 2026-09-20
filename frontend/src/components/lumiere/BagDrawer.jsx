@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Lock, MessageCircle, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
+import { Lock, MessageCircle, Minus, Plus, ShoppingBag, Sparkles, Tag, Trash2, X } from "lucide-react";
 import { inr } from "@/data/products";
 import { useStore } from "@/context/StoreContext";
 import { useIsMobile } from "@/hooks/useIsMobile";
@@ -41,7 +41,7 @@ const BagItem = ({ item }) => {
 };
 
 export const BagDrawer = () => {
-  const { bag, bagOpen, setBagOpen, bagTotal, bagCount } = useStore();
+  const { bag, bagOpen, setBagOpen, bagTotal, bagCount, discount, couponApplied } = useStore();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -89,18 +89,57 @@ export const BagDrawer = () => {
                 </ul>
 
                 <div className="flex-none border-t border-[var(--border-light)] px-5 sm:px-6 pt-4 pb-4 pb-safe space-y-3 bg-surface">
+                  <AnimatePresence mode="wait" initial={false}>
+                    {couponApplied ? (
+                      <motion.div
+                        key="applied"
+                        data-testid="coupon-applied-banner"
+                        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                        className="flex items-center gap-2 rounded-2xl bg-emeraldbadge/10 border border-emeraldbadge/20 px-3 py-2"
+                      >
+                        <Sparkles size={14} className="text-emeraldbadge flex-none" />
+                        <p className="font-body text-xs text-ink flex-1">Code <span className="font-display font-bold tracking-wider">LUXE10</span> applied — Buy 2, get 10% off</p>
+                        <span className="rounded-full bg-emeraldbadge text-white px-2 py-0.5 font-display text-[10px] font-bold">APPLIED</span>
+                      </motion.div>
+                    ) : (
+                      <motion.div
+                        key="nudge"
+                        data-testid="coupon-nudge-banner"
+                        initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
+                        className="flex items-center gap-2 rounded-2xl bg-gold-subtle border border-gold/30 px-3 py-2"
+                      >
+                        <Tag size={14} className="text-gold flex-none" />
+                        <p className="font-body text-xs text-ink flex-1">Add <span className="font-display font-bold">1 more piece</span> to unlock 10% off with code <span className="font-display font-bold tracking-wider">LUXE10</span></p>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                   <div className="space-y-1.5 font-body text-sm">
-                    <div className="flex justify-between text-graphite"><span>Subtotal</span><span className="tabular text-ink">{inr(bagTotal)}</span></div>
+                    <div className="flex justify-between text-graphite"><span>Subtotal</span><span data-testid="bag-subtotal" className="tabular text-ink">{inr(bagTotal)}</span></div>
+                    <AnimatePresence initial={false}>
+                      {couponApplied && (
+                        <motion.div
+                          data-testid="bag-discount-line"
+                          initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+                          className="flex justify-between text-emeraldbadge overflow-hidden"
+                        >
+                          <span className="inline-flex items-center gap-1.5"><Tag size={12} /> Coupon LUXE10 (10% off)</span>
+                          <span data-testid="bag-discount" className="font-semibold tabular">-{inr(discount)}</span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                     <div className="flex justify-between text-graphite"><span>Shipping</span><span className="font-semibold text-emeraldbadge">FREE</span></div>
-                    {bagCount >= 2 && <div className="flex justify-between text-graphite"><span>Code LUXE10 eligible</span><span className="font-semibold text-gold">-10% at confirmation</span></div>}
                     <div className="flex justify-between pt-2 border-t border-[var(--border-light)]">
                       <span className="font-display font-bold text-ink">Estimated Total</span>
-                      <span data-testid="bag-total" className="font-display font-extrabold text-lg text-ink tabular">{inr(bagTotal)}</span>
+                      <span className="text-right">
+                        {couponApplied && <span className="block font-body text-[11px] text-graphite line-through tabular">{inr(bagTotal)}</span>}
+                        <span data-testid="bag-total" className="font-display font-extrabold text-lg text-ink tabular">{inr(bagTotal - discount)}</span>
+                      </span>
                     </div>
                   </div>
                   <button
                     data-testid="whatsapp-checkout-btn"
-                    onClick={() => checkoutBagWhatsApp(bag)}
+                    onClick={() => checkoutBagWhatsApp(bag, discount)}
                     className="w-full h-13 min-h-[52px] rounded-full bg-brand hover:bg-brand-hover text-white font-display font-bold text-sm inline-flex items-center justify-center gap-2 shadow-glow transition-colors active:scale-[0.99]"
                   >
                     <MessageCircle size={17} /> Proceed to Checkout via WhatsApp
