@@ -37,7 +37,7 @@ export const CATEGORIES = [
   { key: "Necklaces", label: "Necklaces", sub: "Chains · Pendants · Layered", image: ASSETS.catNecklaces },
   { key: "Earrings", label: "Earrings", sub: "Hoops · Huggies · Studs", image: ASSETS.catEarrings },
   { key: "Bracelets", label: "Bracelets", sub: "Tennis · Cuffs · Charms", image: ASSETS.catBracelets },
-  { key: "Daily Sets", label: "Daily Sets", sub: "Matched Combos", image: IMG.dailySet },
+  { key: "Daily Sets", label: "Daily Combos", sub: "Matched Combos", image: IMG.dailySet },
 ];
 
 export const METALS = ["18K Gold", "White Gold", "Rose Gold"];
@@ -47,7 +47,7 @@ export const METAL_LABEL = { "18K Gold": "18K Yellow Gold", "White Gold": "Plati
 export const RING_SIZES = [
   { size: 6, mm: 51.8, dia: 16.5 },
   { size: 7, mm: 54.4, dia: 17.3 },
-  { size: 8, mm: 57.0, dia: 18.1 },
+  { size: 8, mm: 56.9, dia: 18.1 },
   { size: 9, mm: 59.5, dia: 18.9 },
   { size: 10, mm: 62.1, dia: 19.8 },
 ];
@@ -88,7 +88,7 @@ export const DEMI_FINE_PRODUCTS = [
     price: 899, originalPrice: 1799, rating: 4.7, reviews: 84,
     images: [IMG.huggies],
     description: "Effortless everyday huggies with micro-pavé stones and a secure click-lock closure. Hypoallergenic, sensitive-ear friendly, and shower-proof.",
-    sizes: ["12mm"], isEssential: true, tag: "WATERPROOF",
+    sizes: ["12mm Diameter"], isEssential: true, tag: "WATERPROOF",
   }),
   make({
     id: "LUM-BR-04", name: "Duchess Tennis Sparkle Bracelet", category: "Bracelets",
@@ -112,12 +112,12 @@ export const DEMI_FINE_PRODUCTS = [
     metals: ["18K Gold", "White Gold"], sizes: ["16 inch + 2 inch extender"], isBestSeller: true, isEssential: true, tag: "BESTSELLER",
   }),
   make({
-    id: "LUM-ER-07", name: "Lune Freshwater Pearl Drops", category: "Earrings",
-    price: 1099, originalPrice: 2099, rating: 4.8, reviews: 73,
+    id: "LUM-ER-07", name: "Baroque Freshwater Pearl Drops", category: "Earrings",
+    price: 1099, originalPrice: 1999, rating: 4.9, reviews: 58,
     images: [IMG.pearlDrops],
-    description: "Cultured freshwater pearls suspended from a bezel-set zircon stud. Lightweight, hypoallergenic posts with butterfly backs for all-day wear.",
+    description: "Organic naturally cultured freshwater pearls dangling from dainty 18K gold huggie hoops. Every pearl is uniquely handpicked.",
     material: "18K Gold PVD • Freshwater Pearl",
-    sizes: ["Free Size"], isNew: true, tag: "NEW IN",
+    metals: ["18K Gold"], sizes: ["One Size"], tag: "NATURAL PEARL",
   }),
   make({
     id: "LUM-RN-08", name: "Baguette Eternity Band", category: "Rings",
@@ -164,22 +164,23 @@ export const DEMI_FINE_PRODUCTS = [
     sizes: ["16-18 inch adjustable"], isEssential: true, tag: "WATERPROOF",
   }),
   make({
-    id: "LUM-BR-14", name: "Pavé Orb Open Cuff", category: "Bracelets",
-    price: 1599, originalPrice: 3199, rating: 4.8, reviews: 39,
+    id: "LUM-BR-08", name: "Roman Numeral Bangle Cuff", category: "Bracelets",
+    price: 1399, originalPrice: 2699, rating: 4.8, reviews: 93,
     images: [IMG.cuff],
-    description: "A sleek open cuff finished with two pavé-set orbs. Gently flexible for a perfect fit on every wrist.",
-    sizes: ["Adjustable"], isNew: true, tag: "NEW IN",
+    description: "Classic high-fashion hinged oval bangle engraved with laser-cut Roman numerals and pavé crystal accents. Titanium steel core.",
+    material: "18K Gold PVD • Titanium Steel Core",
+    sizes: ["Medium (fits up to 6.8 inch wrist)"], isBestSeller: true, tag: "TITANIUM CORE",
   }),
   make({
     id: "LUM-ST-15", name: "Everyday Solitaire Trio Set", category: "Daily Sets",
-    price: 2499, originalPrice: 4999, rating: 4.9, reviews: 158,
+    price: 1499, originalPrice: 4999, rating: 4.9, reviews: 158,
     images: [IMG.dailySet],
     description: "Solitaire pendant, matching studs and a slim stacking ring — the complete daily uniform in one signature baby-blue box.",
     sizes: [6, 7, 8, 9, 10], isBestSeller: true, isEssential: true, tag: "BESTSELLER",
   }),
   make({
     id: "LUM-ST-16", name: "Pearl Dream Duo Set", category: "Daily Sets",
-    price: 1999, originalPrice: 3999, rating: 4.8, reviews: 92,
+    price: 1399, originalPrice: 3999, rating: 4.8, reviews: 92,
     images: [IMG.pearlSet],
     description: "A freshwater pearl pendant with its matching drop earrings. Soft, luminous and impossibly elegant — gift-ready.",
     material: "18K Gold PVD • Freshwater Pearl",
@@ -189,15 +190,15 @@ export const DEMI_FINE_PRODUCTS = [
 
 export const FILTER_TABS = [
   { key: "all", label: "All" },
-  { key: "best", label: "Best Sellers 🔥" },
-  { key: "under1499", label: "Under ₹1499" },
-  { key: "new", label: "New In" },
+  { key: "best", label: "Best Sellers" },
+  { key: "under999", label: "Under ₹999" },
   { key: "essentials", label: "Waterproof Essentials" },
+  { key: "new", label: "New In" },
 ];
 
 export const matchesTab = (p, tab) => {
   if (tab === "best") return p.isBestSeller;
-  if (tab === "under1499") return p.price <= 1499;
+  if (tab === "under999") return p.price < 999;
   if (tab === "new") return p.isNew;
   if (tab === "essentials") return p.isEssential;
   return true;

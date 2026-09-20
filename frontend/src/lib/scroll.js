@@ -4,7 +4,7 @@ export const setLenis = (instance) => { lenis = instance; };
 
 export const scrollTo = (target, options = {}) => {
   if (lenis) {
-    lenis.scrollTo(target, { offset: -72, duration: 1.2, ...options });
+    lenis.scrollTo(target, { offset: -72, duration: 1.2, force: true, ...options });
     return;
   }
   if (typeof target === "number") window.scrollTo({ top: target, behavior: "smooth" });

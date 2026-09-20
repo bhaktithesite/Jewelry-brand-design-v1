@@ -12,7 +12,7 @@ import { CategoryPills } from "@/components/lumiere/CategoryPills";
 import { ReelsStrip } from "@/components/lumiere/ReelsStrip";
 import { ReelViewer } from "@/components/lumiere/ReelViewer";
 import { ProductGrid } from "@/components/lumiere/ProductGrid";
-import { Marquee } from "@/components/lumiere/Marquee";
+
 import { Manifesto } from "@/components/lumiere/Manifesto";
 import { Footer } from "@/components/lumiere/Footer";
 import { BottomNav } from "@/components/lumiere/BottomNav";
@@ -34,16 +34,15 @@ const Page = () => {
     <div className="App" data-testid="lumiere-app">
       <Ticker />
       <Header />
-      <main>
+      <main className="page-wrapper" data-testid="page-wrapper">
         <Hero />
         <TrustBadges />
         <CategoryPills />
-        <ReelsStrip />
         <ProductGrid />
-        <Marquee />
+        <ReelsStrip />
         <Manifesto />
+        <Footer />
       </main>
-      <Footer />
       <BottomNav />
       <ReelViewer />
       <ProductModal />

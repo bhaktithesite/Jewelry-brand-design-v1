@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Instagram, Play, Volume2 } from "lucide-react";
+import { Heart, Instagram, Play } from "lucide-react";
 import { REELS } from "@/data/reels";
 import { DEMI_FINE_PRODUCTS, inr } from "@/data/products";
 import { useStore } from "@/context/StoreContext";
@@ -24,15 +24,18 @@ const ReelCard = ({ reel, index }) => {
   const liked = isWishlisted(product.id);
 
   return (
-    <motion.button
+    <motion.article
       data-testid={`reel-card-${reel.id}`}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.target === e.currentTarget && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); setActiveReel(index); } }}
       onClick={() => setActiveReel(index)}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.06, ease: [0.22, 1, 0.36, 1] }}
       whileTap={{ scale: 0.97 }}
-      className="group relative snap-start flex-none w-[156px] sm:w-[200px] aspect-[9/16] rounded-[22px] overflow-hidden bg-ink text-left shadow-card hover:shadow-card-hover transition-shadow"
+      className="group relative snap-start flex-none w-[176px] sm:w-[200px] aspect-[9/16] rounded-[22px] overflow-hidden bg-ink text-left shadow-card hover:shadow-card-hover transition-shadow"
       aria-label={`Play reel: ${reel.caption}`}
     >
       <LivingMedia reel={reel} priority={index < 2} />
@@ -42,7 +45,7 @@ const ReelCard = ({ reel, index }) => {
         <span className="inline-flex items-center gap-1 rounded-full glass-dark px-2 py-1 text-[10px] font-display font-bold text-white tracking-wider uppercase">
           <Play size={10} className="fill-white" /> Reel
         </span>
-        <span className="w-7 h-7 rounded-full glass-dark flex items-center justify-center text-white"><Volume2 size={12} /></span>
+
       </div>
 
       <div className="absolute bottom-3 left-3 right-3">
@@ -53,22 +56,23 @@ const ReelCard = ({ reel, index }) => {
             <p className="font-display text-[11px] font-bold text-ink truncate">{product.name}</p>
             <p className="font-display text-[11px] text-brand font-extrabold tabular">{inr(product.price)}</p>
           </div>
-          <span
-            role="button"
+          <button
+            aria-label={liked ? "Remove from wishlist" : "Save to wishlist"}
+            aria-pressed={liked}
             data-testid={`reel-wishlist-${reel.id}`}
             onClick={(e) => { e.stopPropagation(); toggleWishlist(product.id); }}
-            className="w-7 h-7 rounded-full flex items-center justify-center text-ink"
+            className="w-11 h-11 shrink-0 rounded-full flex items-center justify-center text-ink"
           >
-            <Heart size={13} className={liked ? "fill-crimson text-crimson" : ""} />
-          </span>
+            <Heart size={15} className={liked ? "fill-crimson text-crimson" : ""} />
+          </button>
         </div>
       </div>
-    </motion.button>
+    </motion.article>
   );
 };
 
 export const ReelsStrip = () => (
-  <section id="reels" data-testid="reels-section" className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
+  <section id="reels" data-testid="reels-section" className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-10 sm:pt-12">
     <Reveal className="flex items-end justify-between mb-5">
       <div>
         <p className="font-body text-[11px] tracking-[0.28em] uppercase text-graphite">As Worn</p>
@@ -79,7 +83,7 @@ export const ReelsStrip = () => (
         href="https://instagram.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-1.5 font-body text-xs text-graphite hover:text-ink transition-colors"
+        className="min-h-11 inline-flex items-center gap-1.5 font-body text-xs text-graphite hover:text-ink transition-colors"
       >
         <Instagram size={14} /> @lumiere.demifine
       </a>

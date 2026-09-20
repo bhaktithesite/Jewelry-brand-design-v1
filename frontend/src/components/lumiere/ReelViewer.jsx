@@ -46,7 +46,7 @@ export const ReelViewer = () => {
           className="fixed inset-0 z-[70] bg-obsidian/95 backdrop-blur-md flex items-center justify-center outline-none"
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
         >
-          <button data-testid="reel-viewer-close" onClick={close} className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full glass-dark text-white flex items-center justify-center" aria-label="Close reels"><X size={18} /></button>
+          <button data-testid="reel-viewer-close" onClick={close} className="absolute top-4 right-4 z-20 w-11 h-11 rounded-full glass-dark text-white flex items-center justify-center" aria-label="Close reels"><X size={18} /></button>
           <button data-testid="reel-viewer-prev" onClick={(e) => { e.stopPropagation(); prev(); }} className="hidden sm:flex absolute left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full glass-dark text-white items-center justify-center" aria-label="Previous reel"><ChevronLeft size={20} /></button>
           <button data-testid="reel-viewer-next" onClick={(e) => { e.stopPropagation(); next(); }} className="hidden sm:flex absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full glass-dark text-white items-center justify-center" aria-label="Next reel"><ChevronRight size={20} /></button>
 
@@ -94,7 +94,7 @@ export const ReelViewer = () => {
               </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 pb-safe">
+            <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 sheet-safe-footer">
               <p className="font-body text-sm text-white/90 leading-snug mb-3 max-w-[85%]">{reel.caption}</p>
               <div className="flex items-center gap-3 rounded-2xl glass p-2.5">
                 <img src={product.image} alt="" className="w-12 h-12 rounded-xl object-cover flex-none" />
@@ -105,7 +105,7 @@ export const ReelViewer = () => {
                 <button
                   data-testid="reel-wishlist-btn"
                   onClick={() => toggleWishlist(product.id)}
-                  className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-ink flex-none"
+                  className="w-11 h-11 rounded-full bg-white flex items-center justify-center text-ink flex-none"
                   aria-label="Wishlist"
                 >
                   <Heart size={16} className={isWishlisted(product.id) ? "fill-crimson text-crimson" : ""} />
@@ -113,7 +113,7 @@ export const ReelViewer = () => {
                 <button
                   data-testid="reel-shop-btn"
                   onClick={shop}
-                  className="h-10 px-4 rounded-full bg-brand text-white font-display text-sm font-bold inline-flex items-center gap-1.5 flex-none"
+                  className="h-11 px-4 rounded-full bg-brand text-white font-display text-sm font-bold inline-flex items-center gap-1.5 flex-none"
                 >
                   <ShoppingBag size={15} /> Shop
                 </button>

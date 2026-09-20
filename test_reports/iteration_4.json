@@ -1,0 +1,38 @@
+{
+  "summary": "Mobile baseline reproduction ONLY for LUMIÈRE V2 at 375x667 and 390x844. Confirmed all three reported issues with hard measurements: (1) ProductModal cramped details area on iPhone SE (269px scroller vs 581px content, 312px overflow) with visible native scrollbar; (2) Fixed bottom nav overlaps footer by ~76px because body/main have padding-bottom=0px (no safe-area spacer); (3) Hero section is 853–869px tall — larger than iPhone SE viewport (667px) — pushing #catalog to y=1628px. Header/logo/search do NOT overlap; header layout at 375px is clean (monogram 16-52, brand 138-236, icons 251-359). No source edits were made per request.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {"component": "ProductModal", "issue": "On iPhone SE (375x667) modal is 613px tall; gallery aspect-[4/3] eats 281px leaving only 269px for the details scroller which needs 581px (312px overflow). Title (y=375) and price (y=448) visible but Metal Finish / Ring Size selectors and Save-badge require scrolling — feels 'clipped'. Fixed action bar takes another 48px. Gallery IS correctly pinned (top stays 53.37 after scroll of 312px) so structurally OK — perceived clipping is due to gallery height, not scroll bug.", "selector": "[data-testid=\"product-modal\"] .aspect-\\[4/3\\]", "priority": "HIGH"},
+      {"component": "ProductModal scroller", "issue": "Scroller uses browser default scrollbar (computed scrollbar-width: auto). On desktop-emulated mobile and any platform showing scrollbars, the details column shows an ugly grey native scrollbar. Needs scrollbar-width: none or thin + webkit-scrollbar rules.", "selector": "[data-lenis-prevent].overflow-y-auto", "priority": "MEDIUM"},
+      {"component": "BottomNav / page bottom padding", "issue": "Fixed bottom-nav (h=64px, bottom-3 => reserves 76px) overlays footer. Measured overlapPx=75.78 at 375x667 and 76.14 at 390x844. body padding-bottom=0px and main padding-bottom=0px — nothing reserves space for the floating nav, so the bottom of the footer ('Made with care in India · Ships worldwide') is visually covered by the nav pill. Fix: add pb-[88px] (or safe-area+nav height) to <main> or <body> on sm: only.", "selector": "footer, [data-testid=\"bottom-nav\"]", "priority": "HIGH"},
+      {"component": "Hero", "issue": "Hero height 853px @375x667 and 869px @390x844 — exceeds the entire mobile viewport height. Grid switches to single-column below lg, so text block + image block stack, plus pt-10 pb-14 padding, resulting in ~128% of iPhone-SE viewport. Catalog anchor lives at y=1628 so users must scroll nearly 2 full screens to see the first product. Consider shrinking hero image to max-w on mobile (currently w-[78%] max-w-[420px]) or reducing top/bottom padding + stats row wrap.", "selector": "[data-testid=\"hero-section\"]", "priority": "HIGH"}
+    ],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "Header @375", "issues": ["No overlap detected between brand-logo (right=236) and search-toggle-btn (left=251); 15px gap. Header is 57px tall. No action needed here — original concern not reproducible."]},
+      {"screen": "Modal @375", "issues": ["Gallery drag hint area (aspect-[4/3]) dominates viewport; thumb column of 3 thumbnails visible but they crowd the small main image. Consider aspect-[1/1] with slightly reduced height, or hide side-thumb rail and rely on the bottom dots on mobile."]},
+      {"screen": "Footer @375", "issues": ["Bottom nav pill overlays the last 2 footer lines; contrast is OK but content is hidden."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Reduce/refactor mobile hero: cut vertical padding and/or stack the image behind text, target hero height <= ~85vh on <sm.",
+    "Add pb-[calc(env(safe-area-inset-bottom)+88px)] to <main>/<body> on sm: so footer isn't covered by fixed bottom-nav.",
+    "Add scrollbar-width: none + &::-webkit-scrollbar{display:none} to the modal's [data-lenis-prevent] scroller (or use custom thin brand scrollbar).",
+    "Rebalance ProductModal on <sm: shrink gallery (e.g. aspect-[1/1] with max-h ~40vh) OR make the whole sheet scroll (single scroll surface) so metal/size selectors are reachable without hitting scrollbar area."
+  ],
+  "critical_code_review_comments": [
+    "ProductModal.jsx: mobile layout uses flex-col with a flex-1 min-h-0 details column and sticky action bar. Structure is correct; the issue is the fixed 4:3 aspect for the gallery consuming ~45% of a 613px sheet.",
+    "BottomNav.jsx: nav is `fixed bottom-3` with h=64 => occupies bottom 76px of the viewport. There is no complementary padding-bottom reservation anywhere in App.js / index.css for sm breakpoint, causing footer overlap.",
+    "Hero.jsx: on mobile the grid collapses and pt-10 pb-14 combined with a 3/4 aspect image at 78% width plus a wrapping stats row produces >850px height on all tested phones.",
+    "Modal scroller misses `scrollbar-width` styling — inconsistent look across browsers."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "baseline-reproduction-complete"},
+  "seed_data_creation": "None. Static 16 products already seeded in /app/frontend/src/data/products.",
+  "retest_needed": true,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "This iteration was ONLY baseline reproduction (no edits). Measurements captured at 375x667 and 390x844: modal scroller overflow=312px/160px respectively, gallery height=281/292px, nav-footer overlap=75.78/76.14px, hero height=853/869px, catalog top=1628/1644px. After main agent refactors, re-measure the same fields and confirm: hero <= ~85vh, nav overlap = 0, modal scroller can display metal+size selectors above the fold OR reach them within one thumb-swipe, scrollbar hidden. Do NOT send WhatsApp messages during retest. Product card used: [data-testid=\"product-card-LUM-RN-01\"].",
+  "rca of the issue": "1) Modal 'clipping': gallery uses aspect-[4/3] at 100% width on mobile, consuming 281px of a 613px sheet, leaving only 269px for details vs 581px needed. Structure is fine (gallery IS pinned) but proportions are wrong for small viewports. 2) Nav overlap: no bottom padding reserved on <main>/<body> for the h64+bottom-3 fixed nav (76px total). 3) Tall hero: no vertical constraint for mobile; padding + stacked layout + 3/4 image + 3-column stats row produce >100% of iPhone SE viewport height."
+}

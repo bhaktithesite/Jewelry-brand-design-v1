@@ -33,7 +33,7 @@ export const BottomNav = () => {
   };
 
   return (
-    <nav data-testid="bottom-nav" className="sm:hidden fixed bottom-3 left-3 right-3 z-40 h-[64px] rounded-2xl glass hairline shadow-[0_10px_30px_rgba(17,24,39,0.12)] flex">
+    <nav data-testid="bottom-nav" aria-label="Mobile shopping navigation" className="mobile-dock sm:hidden fixed left-3 right-3 z-50 h-[64px] rounded-full hairline shadow-[0_10px_30px_rgba(17,24,39,0.12)] flex">
       <Item id="home" icon={Home} label="Home" testId="bottom-nav-home" onClick={() => scrollTo(0)} />
       <Item id="catalog" icon={Gem} label="Catalog" testId="bottom-nav-catalog" onClick={() => scrollTo("#catalog", { offset: -110 })} />
       <Item id="bag" icon={ShoppingBag} label="Bag" testId="bottom-nav-bag" badge={bagCount} onClick={() => setBagOpen(true)} />

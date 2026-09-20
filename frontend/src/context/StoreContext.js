@@ -1,3 +1,4 @@
+import { METAL_LABEL } from "@/data/products";
 import { createContext, useCallback, useContext, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
@@ -26,10 +27,10 @@ export const StoreProvider = ({ children }) => {
       if (existing) return prev.map((i) => (i.key === key ? { ...i, quantity: i.quantity + quantity } : i));
       return [...prev, {
         key, id: product.id, name: product.name, price: product.price, originalPrice: product.originalPrice,
-        image: product.image, selectedMetal: metal, selectedSize: size, quantity,
+        image: product.image, material: product.material, selectedMetal: metal, selectedSize: size, quantity,
       }];
     });
-    toast.success(`${product.name} added to bag`, { description: `${metal}${size ? ` · Size ${size}` : ""}` });
+    toast.success("Added to your bag!", { description: `${product.name} · ${METAL_LABEL[metal] || metal}${size ? ` · ${typeof size === "number" ? "US " : ""}${size}` : ""}` });
   }, [setBag]);
 
   const updateQty = useCallback((key, delta) => {

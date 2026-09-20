@@ -13,18 +13,18 @@ export const Header = () => {
   };
 
   return (
-    <header data-testid="site-header" className="sticky top-0 z-40 glass border-b border-[var(--border-light)]">
+    <header data-testid="site-header" className="sticky top-0 z-40 bg-white/90 backdrop-blur-[20px] border-b border-[var(--border-light)]">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
         <button
           data-testid="brand-monogram"
           onClick={() => scrollTo(0)}
-          className="w-9 h-9 rounded-full border border-gold/70 flex items-center justify-center font-serif text-sm text-ink hover:bg-gold-subtle transition-colors"
+          className="w-11 h-11 shrink-0 rounded-full border border-gold/70 flex items-center justify-center font-serif text-sm text-ink hover:bg-gold-subtle transition-colors"
           aria-label="Back to top"
         >
           L
         </button>
 
-        <button onClick={() => scrollTo(0)} data-testid="brand-logo" className="absolute left-1/2 -translate-x-1/2 text-center leading-none">
+        <button onClick={() => scrollTo(0)} data-testid="brand-logo" className="min-w-0 flex-1 px-1 md:flex-none text-center leading-none h-11 flex flex-col items-center justify-center">
           <span className="block font-serif text-[20px] sm:text-2xl tracking-[0.08em] sm:tracking-[0.12em] text-ink">LUMIÈRE</span>
           <span className="block font-body text-[9px] sm:text-[10px] tracking-[0.32em] uppercase text-graphite mt-0.5">demi-fine</span>
         </button>
@@ -40,7 +40,7 @@ export const Header = () => {
           <button
             data-testid="search-toggle-btn"
             onClick={() => setSearchOpen(!searchOpen)}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            className="w-11 h-11 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
             aria-label="Search"
           >
             {searchOpen ? <X size={20} /> : <Search size={20} />}
@@ -48,14 +48,14 @@ export const Header = () => {
           <button
             data-testid="header-wishlist-btn"
             onClick={() => setWishlistOpen(true)}
-            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            className="relative w-11 h-11 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
             aria-label="Open wishlist"
           >
             <Heart size={20} className={wishlist.length ? "fill-crimson text-crimson" : ""} />
             <AnimatePresence>
               {wishlist.length > 0 && (
                 <motion.span
-                  key={wishlist.length}
+                  key="wishlist-count"
                   data-testid="header-wishlist-count"
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -71,20 +71,20 @@ export const Header = () => {
           <button
             data-testid="header-bag-btn"
             onClick={() => setBagOpen(true)}
-            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            className="relative w-11 h-11 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
             aria-label="Open bag"
           >
             <ShoppingBag size={20} />
             <AnimatePresence>
-              {bagCount > 0 && (
+              {bagCount >= 0 && (
                 <motion.span
-                  key={bagCount}
+                  key="bag-count"
                   data-testid="header-bag-count"
                   initial={{ scale: 0.5, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ scale: 0.5, opacity: 0 }}
                   transition={{ type: "spring", stiffness: 500, damping: 22 }}
-                  className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-brand text-white text-[10px] font-display font-bold flex items-center justify-center tabular"
+                  className="absolute -top-0.5 -right-0.5 min-w-[18px] h-[18px] px-1 rounded-full bg-gold text-ink text-[10px] font-display font-bold flex items-center justify-center tabular"
                 >
                   {bagCount}
                 </motion.span>
@@ -107,15 +107,15 @@ export const Header = () => {
               <div className="flex items-center gap-2 bg-subtle rounded-full px-4 h-11">
                 <Search size={16} className="text-graphite" />
                 <input
-                  data-testid="search-input"
+                  aria-label="Search the jewellery catalog" data-testid="search-input"
                   autoFocus
                   value={query}
                   onChange={(e) => onSearch(e.target.value)}
                   placeholder="Search rings, pearls, hoops…"
-                  className="flex-1 bg-transparent outline-none font-body text-sm text-ink placeholder:text-graphite"
+                  className="flex-1 bg-transparent outline-none font-body text-base text-ink placeholder:text-graphite"
                 />
                 {query && (
-                  <button data-testid="search-clear-btn" onClick={() => setQuery("")} className="text-graphite hover:text-ink"><X size={16} /></button>
+                  <button data-testid="search-clear-btn" aria-label="Clear search" onClick={() => setQuery("")} className="w-11 h-11 flex items-center justify-center text-graphite hover:text-ink"><X size={16} /></button>
                 )}
               </div>
             </div>

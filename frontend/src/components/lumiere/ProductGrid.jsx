@@ -8,7 +8,7 @@ import { ProductCard } from "./ProductCard";
 import { Reveal } from "./Reveal";
 
 export const ProductGrid = () => {
-  const { category, tab, query, setCategory, setTab, setQuery } = useStore();
+  const { category, tab, query, setCategory, setTab, setQuery, searchOpen } = useStore();
 
   const items = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -22,7 +22,7 @@ export const ProductGrid = () => {
   const reset = () => { setCategory("All"); setTab("all"); setQuery(""); };
 
   return (
-    <section id="catalog" data-testid="catalog-section" className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-12 sm:pt-16">
+    <section id="catalog" data-testid="catalog-section" className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6 sm:pt-10">
       <Reveal className="flex items-end justify-between gap-4 mb-5">
         <div>
           <p className="font-body text-[11px] tracking-[0.28em] uppercase text-graphite">The Catalog</p>
@@ -32,11 +32,11 @@ export const ProductGrid = () => {
           </h2>
         </div>
         {(category !== "All" || tab !== "all" || query) && (
-          <button data-testid="catalog-reset-btn" onClick={reset} className="font-body text-xs text-brand hover:underline">Clear filters</button>
+          <button data-testid="catalog-reset-btn" onClick={reset} className="min-h-11 px-2 font-body text-xs text-brand hover:underline">Clear filters</button>
         )}
       </Reveal>
 
-      <div className="sticky top-14 sm:top-16 z-30 -mx-4 px-4 sm:mx-0 sm:px-0 py-3 bg-canvas/85 backdrop-blur-md">
+      <div className={`sticky ${searchOpen ? "top-[124px] sm:top-[132px]" : "top-14 sm:top-16"} z-30 -mx-4 px-4 sm:mx-0 sm:px-0 py-2 bg-canvas/95 backdrop-blur-md`}>
         <FilterTabs />
       </div>
 
@@ -50,7 +50,7 @@ export const ProductGrid = () => {
         <div data-testid="catalog-empty" className="py-16 text-center">
           <SearchX className="mx-auto text-graphite" size={28} />
           <p className="mt-3 font-display font-semibold text-ink">No pieces match that search.</p>
-          <button onClick={reset} className="mt-3 text-sm font-body text-brand hover:underline">Reset filters</button>
+          <button data-testid="empty-reset-filters-btn" onClick={reset} className="mt-3 min-h-11 px-3 text-sm font-body text-brand hover:underline">Reset filters</button>
         </div>
       )}
     </section>

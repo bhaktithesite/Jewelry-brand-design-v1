@@ -16,15 +16,15 @@ module.exports = {
       colors: {
         canvas: '#F8FAFD',
         surface: '#FFFFFF',
-        subtle: '#EDF3F9',
+        subtle: '#F0F5FA',
         brand: { DEFAULT: '#2563EB', hover: '#1D4ED8' },
         gold: { DEFAULT: '#D4AF37', subtle: '#FDF8EA' },
         rosegold: '#E0A99A',
         silver: '#CBD5E1',
-        ink: '#111827',
-        graphite: '#6B7280',
+        ink: '#0F172A',
+        graphite: '#64748B',
         emeraldbadge: '#059669',
-        crimson: '#EF4444',
+        crimson: '#DC2626',
         obsidian: '#0D1117',
         champagne: '#F3E5AB',
         background: 'hsl(var(--background))',
@@ -67,7 +67,7 @@ module.exports = {
         sm: 'calc(var(--radius) - 4px)'
       },
       boxShadow: {
-        card: '0 4px 20px rgba(0,0,0,0.04)',
+        card: '0 4px 16px rgba(15,23,42,0.04)',
         'card-hover': '0 14px 34px rgba(17,24,39,0.10)',
         glow: '0 10px 30px rgba(37,99,235,0.35)',
       },
