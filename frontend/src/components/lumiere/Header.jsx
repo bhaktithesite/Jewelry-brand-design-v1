@@ -25,11 +25,11 @@ export const Header = () => {
         </button>
 
         <button onClick={() => scrollTo(0)} data-testid="brand-logo" className="absolute left-1/2 -translate-x-1/2 text-center leading-none">
-          <span className="block font-serif text-[22px] sm:text-2xl tracking-[0.12em] text-ink">LUMIÈRE</span>
+          <span className="block font-serif text-[20px] sm:text-2xl tracking-[0.08em] sm:tracking-[0.12em] text-ink">LUMIÈRE</span>
           <span className="block font-body text-[9px] sm:text-[10px] tracking-[0.32em] uppercase text-graphite mt-0.5">demi-fine</span>
         </button>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center gap-0 sm:gap-2">
           <nav className="hidden md:flex items-center gap-6 mr-4 font-body text-sm text-graphite">
             <button data-testid="nav-catalog" onClick={() => scrollTo("#catalog", { offset: -110 })} className="hover:text-ink transition-colors">Catalog</button>
             <button data-testid="nav-why" onClick={() => scrollTo("#why")} className="hover:text-ink transition-colors">Why Demi-Fine</button>
@@ -40,7 +40,7 @@ export const Header = () => {
           <button
             data-testid="search-toggle-btn"
             onClick={() => setSearchOpen(!searchOpen)}
-            className="w-10 h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
             aria-label="Search"
           >
             {searchOpen ? <X size={20} /> : <Search size={20} />}
@@ -48,7 +48,7 @@ export const Header = () => {
           <button
             data-testid="header-wishlist-btn"
             onClick={() => setWishlistOpen(true)}
-            className="relative w-10 h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
             aria-label="Open wishlist"
           >
             <Heart size={20} className={wishlist.length ? "fill-crimson text-crimson" : ""} />
@@ -71,7 +71,7 @@ export const Header = () => {
           <button
             data-testid="header-bag-btn"
             onClick={() => setBagOpen(true)}
-            className="relative w-10 h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
+            className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-ink hover:bg-subtle transition-colors"
             aria-label="Open bag"
           >
             <ShoppingBag size={20} />

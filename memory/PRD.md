@@ -37,6 +37,8 @@ Build a hyper-fast, mobile-first one-page catalog website for a premium Demi-Fin
 - Lenis smooth scroll with lock on modal/drawer; `data-lenis-prevent` on scroll regions
 - data-testid on every interactive element
 - Reels strip ("Shop the Look") above catalog: 6 swipeable 9:16 living-image reels (`src/data/reels.js`, MP4-swappable via `video` field) + full-screen ReelViewer with auto-advance, swipe, keyboard, wishlist and Shop → product modal
+- Wishlist Drawer: header heart with count badge opens a Saved Hearts drawer (add-to-bag per item, view, remove, "Move all" CTA)
+- Coupon LUXE10: auto-applied 10% discount line in bag when ≥2 pieces; nudge banner at 1 item; discounted Grand Total also flows into the WhatsApp checkout message
 
 ## Backlog
 - P1: Share sheet fallback UX polish; "Recently viewed" strip
