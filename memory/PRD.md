@@ -36,6 +36,7 @@ Build a hyper-fast, mobile-first one-page catalog website for a premium Demi-Fin
 - localStorage persistence (`lumiere_bag`, `lumiere_wishlist`)
 - Lenis smooth scroll with lock on modal/drawer; `data-lenis-prevent` on scroll regions
 - data-testid on every interactive element
+- Reels strip ("Shop the Look") above catalog: 6 swipeable 9:16 living-image reels (`src/data/reels.js`, MP4-swappable via `video` field) + full-screen ReelViewer with auto-advance, swipe, keyboard, wishlist and Shop → product modal
 
 ## Backlog
 - P1: Share sheet fallback UX polish; "Recently viewed" strip

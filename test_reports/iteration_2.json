@@ -1,0 +1,35 @@
+{
+  "summary": "Frontend-only testing of the new LUMIÈRE Reels feature (ReelsStrip + ReelViewer). Verified: DOM order (reels-section before catalog-section), 6 reel cards with instagram handle, viewer open on card tap, product name for each reel, next/prev buttons and keyboard arrows navigation (with 6->1 wrap), 6s auto-advance to next reel, Shop button closes viewer and opens correct product modal with bag count increment, viewer wishlist toggles LS and grid card aria-pressed, card-heart toggle without opening viewer, mobile track scrollable with 156px cards, viewer full-viewport at 390x844, body scroll lock+restore, swipe-drag on mobile advances reel, no horizontal overflow at 390 or 1920, no console errors, product-card click still opens modal, catalog count remains (16). One functional bug found: Escape key does NOT close the reel viewer when focus remains on the triggering reel-card button (window keydown listener works when the event is dispatched at window level, but the native keydown from Playwright/user Escape press on the focused card button does not seem to trigger close). Practical repro: click reel-card, press Escape -> viewer stays open. Users can still close via the X button, viewer-close, arrow key + shop, or clicking backdrop is not implemented. Also minor code smell: useEffect for keydown has no dependency array (re-registers listener every render, including on paused toggles).",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "ReelViewer",
+        "issue": "Escape key does not close the viewer when the originating reel card button still holds focus (typical after opening). Dispatching a synthetic keydown at window level DOES close it, and pressing Escape after focusing another element (e.g. reel-viewer-next) also closes it. Suggests focus/event-target behaviour: the button-in-background may not bubble the keydown to window, or Chromium blurs on Escape without dispatching. Fix: on open, focus the viewer container (e.g. auto-focus reel-viewer-close or the motion.div) so Escape targets the overlay.",
+        "selector": "[data-testid=\"reel-viewer\"]",
+        "priority": "MEDIUM"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [],
+  "action_items": [
+    "Fix Escape-to-close for ReelViewer: after opening, programmatically focus an element inside the viewer (e.g., ref-focus the reel-viewer-close button or the motion overlay) so Escape reliably closes regardless of what triggered the open.",
+    "Add a dependency array to the ReelViewer useEffect (e.g., [open, activeReel]) to avoid re-registering the window keydown listener on every render (currently churns on each paused/setPaused state change)."
+  ],
+  "critical_code_review_comments": [
+    "ReelViewer.jsx L23-32: useEffect has no dependency array; listener re-registers on every render (including onPointerDown/Up paused toggles). Add [open, activeReel] deps.",
+    "ReelViewer.jsx L19-20: next()/prev() close over stale activeReel from render; still works via re-render, but consider functional setState `setActiveReel(a => (a + 1) % REELS.length)` for robustness (also decouples from the useEffect stale-closure risk).",
+    "ReelViewer.jsx L44: `onClick={close}` on the top-level overlay's X button is fine, but there is no backdrop-click-to-close on the outer bg-obsidian container. Consider adding onClick={close} on the outer motion.div (with stopPropagation on inner) for standard modal UX.",
+    "ReelViewer.jsx L34 shop(): 250ms timeout to sequence close→openProduct is a magic number; consider driving via AnimatePresence onExitComplete for correctness."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (frontend-only)", "frontend": "~95% (11/12 flows fully pass; Escape-close partial)"},
+  "test_credentials": "None required",
+  "seed_data_creation": "None",
+  "retest_needed": true,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "All reel flows verified on desktop 1920x4000 and mobile 390x844. Only outstanding bug is Escape-close from initial card focus. Nav-next/prev buttons work with force-click; earlier flakiness was due to a race with viewer close animation. Auto-advance requires ~6.5-6.8s wait. Mobile drag: use page.mouse.move(300,y)->mouse.down()->stepped moves to x=60->mouse.up() over ~300ms on element with class touch-pan-y inside reel-viewer.",
+  "rca of the issue": "ReelViewer registers a window-level keydown listener that calls close() on Escape. However, when the user clicks a reel-card button to open the viewer, that button retains DOM focus (activeElement=BUTTON#reel-card-reel-01). Pressing Escape on a focused button in Chromium via Playwright (and possibly real users) does not appear to trigger the window keydown listener as expected in this case; JS-dispatched keydown at window DOES fire close(). Mitigation: after mount of the viewer, call `.focus()` on an element inside the viewer (e.g., a ref on the outer motion.div with tabIndex=-1, or the close button). This ensures Escape targets the overlay, bubbles naturally to window, and consistently closes the viewer. Adding [open, activeReel] deps to the useEffect is also recommended to stop the listener churn."
+}
