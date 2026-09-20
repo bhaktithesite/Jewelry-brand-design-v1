@@ -149,6 +149,38 @@ body {
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 
+@keyframes kb-zoom-in {
+    from { transform: scale(1) translate(0, 0); }
+    to { transform: scale(1.18) translate(-2%, -3%); }
+}
+@keyframes kb-pan-left {
+    from { transform: scale(1.15) translate(4%, 0); }
+    to { transform: scale(1.15) translate(-4%, 2%); }
+}
+@keyframes kb-zoom-out {
+    from { transform: scale(1.2) translate(2%, 3%); }
+    to { transform: scale(1.02) translate(0, 0); }
+}
+@keyframes kb-pan-up {
+    from { transform: scale(1.15) translate(0, 4%); }
+    to { transform: scale(1.15) translate(-2%, -4%); }
+}
+@keyframes reel-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+.living-img {
+    will-change: transform;
+    animation-duration: 9s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+.reel-progress-bar {
+    transform-origin: left center;
+    animation: reel-progress linear forwards;
+}
+
 .marquee-track {
     display: flex;
     width: max-content;

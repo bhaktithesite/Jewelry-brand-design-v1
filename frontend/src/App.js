@@ -9,6 +9,8 @@ import { Header } from "@/components/lumiere/Header";
 import { Hero } from "@/components/lumiere/Hero";
 import { TrustBadges } from "@/components/lumiere/TrustBadges";
 import { CategoryPills } from "@/components/lumiere/CategoryPills";
+import { ReelsStrip } from "@/components/lumiere/ReelsStrip";
+import { ReelViewer } from "@/components/lumiere/ReelViewer";
 import { ProductGrid } from "@/components/lumiere/ProductGrid";
 import { Marquee } from "@/components/lumiere/Marquee";
 import { Manifesto } from "@/components/lumiere/Manifesto";
@@ -19,13 +21,13 @@ import { BagDrawer } from "@/components/lumiere/BagDrawer";
 import { SizeGuide } from "@/components/lumiere/SizeGuide";
 
 const Page = () => {
-  const { activeProduct, bagOpen, sizeGuideOpen } = useStore();
+  const { activeProduct, bagOpen, sizeGuideOpen, activeReel } = useStore();
   useLenis();
 
   useEffect(() => {
-    if (activeProduct || bagOpen || sizeGuideOpen) lockScroll();
+    if (activeProduct || bagOpen || sizeGuideOpen || activeReel !== null) lockScroll();
     else unlockScroll();
-  }, [activeProduct, bagOpen, sizeGuideOpen]);
+  }, [activeProduct, bagOpen, sizeGuideOpen, activeReel]);
 
   return (
     <div className="App" data-testid="lumiere-app">
@@ -35,12 +37,14 @@ const Page = () => {
         <Hero />
         <TrustBadges />
         <CategoryPills />
+        <ReelsStrip />
         <ProductGrid />
         <Marquee />
         <Manifesto />
       </main>
       <Footer />
       <BottomNav />
+      <ReelViewer />
       <ProductModal />
       <BagDrawer />
       <SizeGuide />

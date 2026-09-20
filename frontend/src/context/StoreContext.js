@@ -12,6 +12,7 @@ export const StoreProvider = ({ children }) => {
   const [activeProduct, setActiveProduct] = useState(null);
   const [bagOpen, setBagOpen] = useState(false);
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+  const [activeReel, setActiveReel] = useState(null);
   const [category, setCategory] = useState("All");
   const [tab, setTab] = useState("all");
   const [query, setQuery] = useState("");
@@ -49,7 +50,7 @@ export const StoreProvider = ({ children }) => {
     bag, bagCount, bagTotal, addToBag, updateQty, removeFromBag,
     wishlist, toggleWishlist, isWishlisted: (id) => wishlist.includes(id),
     activeProduct, openProduct: setActiveProduct, closeProduct: () => setActiveProduct(null),
-    bagOpen, setBagOpen, sizeGuideOpen, setSizeGuideOpen,
+    bagOpen, setBagOpen, sizeGuideOpen, setSizeGuideOpen, activeReel, setActiveReel,
     category, setCategory, tab, setTab, query, setQuery, searchOpen, setSearchOpen,
   };
 
