@@ -1,0 +1,26 @@
+{
+  "summary": "LUMIÈRE V2 full regression pass on frontend (React CRA, no backend). Executed at 375x667, 390x844, 430x932 and 1280x800. All critical V2 acceptance items PASS: compact hero (301px mobile / 440px desktop), 57px sticky header with no logo/search/bag collision, no horizontal overflow, bottom-nav does NOT overlap footer (overlap=0px on all 3 phone sizes; main padding-bottom=96px), header bag badge renders '0', 16 products with LUM-BR-08 replacing LUM-BR-14. ProductModal: single unified scroll body (modal-scroll-body 530px) contains 240px gallery + all details; scrollbar hidden (scrollbar-width:none); title/rating/price/metal/size all reachable; when scrolled the gallery moves offscreen (top -195) while modal-close-btn and modal-action-dock stay pinned. Metal & Size selection works (aria-pressed=true, correct METAL_LABEL '18K Rose Gold' shown). window.open interception verified: modal-buy-now-btn hits wa.me/919112299902 with once-encoded text containing SKU 'LUM-RN-01', Finish '18K Rose Gold', 'US 9', '₹1,299', 'MRP: ₹2,499', 'Free Express'. Size Guide opens with all 5 mm values (51.8, 54.4, 56.9, 59.5, 62.1); Escape closes ONLY the size guide, product modal + selected variants preserved. Bag: adding ring+pendant => subtotal ₹1,998, LUXE10 -₹200, total ₹1,798, coupon-applied-banner visible. Single SKU qty=2 => ₹2,598/-₹260/₹2,338. Decrement to 1 removes coupon-line and shows nudge-banner. Remove last item shows bag-empty with Browse Catalog action. WhatsApp checkout URL includes SKU, per-line Qty, full METAL_LABEL, US-prefixed ring size, line prices, subtotal, coupon line, grand total, total pieces — all values match the UI. Persistence verified: bag survives reload (badge '1', localStorage lumiere_bag intact). Filters correctly restrict catalog after animation settle: All=16, Under ₹999=3 (LUM-PD-02 ₹699, LUM-ER-03 ₹899, LUM-NK-09 ₹899, strictly <999). Live search 'pearl' => 3 products, catalog-count updates. Reels section positioned AFTER catalog (y=3552 vs catalog y=683). Touch targets on modal action dock, close, share, wishlist, size-guide-btn all >=44px. No JS/console errors. No duplicate data-testid attributes.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {"screen": "ProductModal @375x667", "issues": ["Sheet total height 655px, action dock reachable but the initial (unscrolled) view shows only the gallery + trust badges; user has to scroll to see Metal Finish & Ring Size. This is by design per spec (unified scroll body) and works well; no bug."]}
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "whatsapp.js buyNowWhatsApp is called with `METAL_LABEL[metal]` from ProductModal, then inside the function it does `METAL_LABEL[metal] || metal` again. Because the passed value is already the label (not a key), the second lookup returns undefined and it falls back to the passed string. Works, but is fragile — either always pass the raw key OR always pass the label; do not double-map.",
+    "ProductModal onOpenAutoFocus intentionally focuses the close button — good for a11y. However there is no explicit focus trap fallback for keyboard tab wrapping if Radix internals change; consider unit-tested tab loop. (Not a bug today.)",
+    "StoreContext.addToBag toast description manually builds size string ('US ' + n) — displaySize() helper already exists in whatsapp.js. Consider centralising the size formatter to avoid drift.",
+    "products.js `make()` mutates images by re-spreading LIFE array; if LIFE arrays are ever mutated externally each product gallery will share references. Currently safe (LIFE is only read) but worth noting."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "n/a", "frontend": "100% on tested V2 acceptance criteria"},
+  "seed_data_creation": "None (static catalog).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "V2 shipped stable. Key numbers: hero heights 301(mobile)/440(desktop), header 57/65, modal gallery=240 & scroll body=530 at 375x667, bottom-nav-vs-footer overlap=0, Under999=3 items, LUXE10 subtotal*0.1 rounded (Math.round). Bag key format still `id__RAW_METAL__size` (e.g. `LUM-RN-01__18K Gold__6`) but UI/WhatsApp payload correctly resolves to METAL_LABEL. window.open interception via addInitScript works; use `window._opened` array to inspect wa.me URLs without actually sending. Filter tabs need ~800-1500ms wait after click for framer-motion exit animations to finish before counting visible cards (r.width>0 alone catches exiting elements). No JS errors, no duplicate testids, no horizontal overflow, main padding-bottom=96px handles floating bottom-nav on <sm.",
+  "rca of the issue": "No new defects. Iteration-4 issues (modal clipping, nav-overlap, giant hero) are all resolved: modal now uses a single unified scroll body with a bounded 240px gallery so all product details reach the fold, main receives pb-96 so the floating bottom-nav sits over reserved space (overlap=0), and hero copy/art was compacted to 301px on mobile (well under 100vh)."
+}
