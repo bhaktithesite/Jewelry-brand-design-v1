@@ -1,0 +1,194 @@
+{
+  "brand_identity": {
+    "name": "LUMIÈRE DEMI-FINE JEWELLERY",
+    "subtitle": "demi-fine",
+    "tagline": "Timeless Beauty, Crafted for You.",
+    "positioning": "Demi-fine = looks like 18K gold & diamonds at ₹999–₹3,499. Everyday luxury made waterproof and tarnish-free.",
+    "emotional_archetype": "LUXURY & SOFT ELEGANCE (Periwinkle Satin & Warm Porcelain)",
+    "tone_of_voice": "Parisian luxury charm, warm, effortless, high-trust, friction-free concierge experience"
+  },
+  "design_system_tokens": {
+    "colors": {
+      "bg_canvas": "#F8FAFD",
+      "bg_surface": "#FFFFFF",
+      "bg_subtle": "#EDF3F9",
+      "color_brand_blue": "#2563EB",
+      "color_brand_blue_hover": "#1D4ED8",
+      "color_gold_accent": "#D4AF37",
+      "color_gold_subtle": "#FDF8EA",
+      "color_rose_gold": "#E0A99A",
+      "color_silver": "#CBD5E1",
+      "color_text_main": "#111827",
+      "color_text_muted": "#6B7280",
+      "color_badge_green": "#059669",
+      "color_discount_red": "#EF4444",
+      "border_light": "rgba(229,231,235,0.8)",
+      "ticker_bg": "#0D1117",
+      "ticker_text": "#F3E5AB"
+    },
+    "typography": {
+      "display_font": "Plus Jakarta Sans, sans-serif",
+      "editorial_font": "Playfair Display, serif",
+      "body_font": "Inter, sans-serif",
+      "scale": {
+        "h1_hero": "text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight",
+        "h2_section": "text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight",
+        "h3_title": "text-lg sm:text-xl font-semibold",
+        "body_text": "text-sm sm:text-base font-normal text-gray-600 leading-relaxed",
+        "price_text": "text-base sm:text-lg font-bold text-gray-900 tracking-tight font-mono",
+        "badge_text": "text-xs font-semibold tracking-wider uppercase"
+      }
+    },
+    "layout_grid": {
+      "mobile_catalog_grid": "grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4",
+      "card_border_radius": "rounded-2xl",
+      "card_shadow": "shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_28px_rgba(0,0,0,0.08)] transition-all duration-300",
+      "max_container_width": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+    }
+  },
+  "key_features_architecture": {
+    "sections": [
+      {
+        "id": "announcement_ticker",
+        "description": "Dark obsidian banner with scrolling gold text: '✨ 100% WATERPROOF & ANTI-TARNISH • BUY 2 GET 10% OFF • USE CODE: LUXE10 ✨'"
+      },
+      {
+        "id": "mobile_header",
+        "description": "Sticky top bar with left menu monogram, center Playfair Display 'LUMIÈRE demi-fine', right search toggle and slide-out bag icon with live item count pill"
+      },
+      {
+        "id": "kinetic_hero",
+        "description": "Soft sky-blue satin backdrop gradient (#DDEBFA to #EDF4FC), line-by-line text reveal animation, floating 18K gold pendant hero visual with soft shimmer glow, 'Explore Catalog ↓' cobalt pill CTA button"
+      },
+      {
+        "id": "trust_badges_strip",
+        "description": "3 elevated cards: Free Express Shipping (24h dispatch), Lifetime Color Warranty (18K Gold PVD over 925 Silver), Easy 7-Day Returns"
+      },
+      {
+        "id": "story_categories",
+        "description": "Circular story pills with gold ring borders: Rings, Necklaces, Earrings, Bracelets, Daily Sets with horizontal swipe snap"
+      },
+      {
+        "id": "quick_filters_search",
+        "description": "Tabs: All, Best Sellers 🔥, Under ₹1499, New In, Waterproof Essentials + real-time live search filter"
+      },
+      {
+        "id": "product_catalog_grid",
+        "description": "16 demi-fine items in 2-column mobile layout. Interactive heart wishlist toggle, discount % badges, material tag, price + strikethrough, quick-add '+' button"
+      },
+      {
+        "id": "product_modal_popup",
+        "description": "Bottom sheet / pop-up modal: multi-image gallery with thumbnails, metal finish selector (18K Gold / Platinum / Rose Gold), ring size picker with mm size guide modal, dual CTAs: 'Add to Bag' and 'Buy Now via WhatsApp'"
+      },
+      {
+        "id": "bag_drawer",
+        "description": "Slide-out cart drawer with quantity counters, free shipping calculator, total calculation, and zero-API direct WhatsApp checkout wa.me/919112299902"
+      },
+      {
+        "id": "why_demi_fine_manifesto",
+        "description": "4 numbered manifesto chapters: Won't Tarnish, Shower-Proof, 10x More Affordable, Luxury Gift Ready"
+      },
+      {
+        "id": "footer",
+        "description": "Brand statement, WhatsApp direct helpline (+91 91122 99902), quick links, guarantee badges, copyright 2025 LUMIÈRE Jewellery"
+      },
+      {
+        "id": "sticky_bottom_nav",
+        "description": "Mobile-first glassmorphic navigation bar with Home, Catalog, Bag (with count badge), and WhatsApp Concierge quick trigger"
+      }
+    ]
+  },
+  "curated_image_assets": {
+    "hero_pendant": "https://images.pexels.com/photos/15967461/pexels-photo-15967461.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "category_rings": "https://images.unsplash.com/photo-1720528347642-e70ea18b4140?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxnb2xkJTIwcmluZyUyMGN1YmljJTIwemlyY29uaWElMjBwZWFybCUyMGpld2VscnklMjBwcm9kdWN0fGVufDB8fHx8MTc4OTkwNTQ2Mnww&ixlib=rb-4.1.0&q=85",
+    "category_necklaces": "https://images.unsplash.com/photo-1758995115560-59c10d6cc28f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwyfHxnb2xkJTIwcGVuZGFudCUyMG5lY2tsYWNlJTIwamV3ZWxyeSUyMHN0dWRpbyUyMHByb2R1Y3R8ZW58MHx8fHwxNzg5OTA1NDYyfDA&ixlib=rb-4.1.0&q=85",
+    "category_earrings": "https://images.pexels.com/photos/36823005/pexels-photo-36823005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "category_bracelets": "https://images.unsplash.com/photo-1602751584547-5fb8e6c21740?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHszfHxnb2xkJTIwcmluZyUyMGN1YmljJTIwemlyY29uaWElMjBwZWFybCUyMGpld2VscnklMjBwcm9kdWN0fGVufDB8fHx8MTc4OTkwNTQ2Mnww&ixlib=rb-4.1.0&q=85",
+    "category_daily_sets": "https://images.pexels.com/photos/8398845/pexels-photo-8398845.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    "catalog_products": [
+      {
+        "id": "lum-01",
+        "name": "Étoile Solitaire Pearl Ring",
+        "category": "Rings",
+        "price": 1299,
+        "originalPrice": 2499,
+        "discount": "48% OFF",
+        "rating": 4.9,
+        "reviews": 142,
+        "badge": "BEST SELLER 🔥",
+        "isWaterproof": true,
+        "material": "18K Gold PVD • 925 Silver Base",
+        "image": "https://images.pexels.com/photos/31605847/pexels-photo-31605847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "gallery": [
+          "https://images.pexels.com/photos/31605847/pexels-photo-31605847.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "https://images.unsplash.com/photo-1720528347642-e70ea18b4140?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHwxfHxnb2xkJTIwcmluZyUyMGN1YmljJTIwemlyY29uaWElMjBwZWFybCUyMGpld2VscnklMjBwcm9kdWN0fGVufDB8fHx8MTc4OTkwNTQ2Mnww&ixlib=rb-4.1.0&q=85"
+        ]
+      },
+      {
+        "id": "lum-02",
+        "name": "Aura Radiant Pendant Necklace",
+        "category": "Necklaces",
+        "price": 1499,
+        "originalPrice": 2999,
+        "discount": "50% OFF",
+        "rating": 4.8,
+        "reviews": 189,
+        "badge": "WATERPROOF 💧",
+        "isWaterproof": true,
+        "material": "18K Gold PVD • Swiss CZ",
+        "image": "https://images.pexels.com/photos/15967461/pexels-photo-15967461.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "gallery": [
+          "https://images.pexels.com/photos/15967461/pexels-photo-15967461.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "https://images.unsplash.com/photo-1758995115560-59c10d6cc28f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwyfHxnb2xkJTIwcGVuZGFudCUyMG5lY2tsYWNlJTIwamV3ZWxyeSUyMHN0dWRpbyUyMHByb2R1Y3R8ZW58MHx8fHwxNzg5OTA1NDYyfDA&ixlib=rb-4.1.0&q=85"
+        ]
+      },
+      {
+        "id": "lum-03",
+        "name": "Celeste Freshwater Pearl Hoops",
+        "category": "Earrings",
+        "price": 1199,
+        "originalPrice": 2199,
+        "discount": "45% OFF",
+        "rating": 4.9,
+        "reviews": 210,
+        "badge": "NEW IN ✨",
+        "isWaterproof": true,
+        "material": "18K Gold PVD • Freshwater Pearl",
+        "image": "https://images.pexels.com/photos/36823005/pexels-photo-36823005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "gallery": [
+          "https://images.pexels.com/photos/36823005/pexels-photo-36823005.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+          "https://images.pexels.com/photos/9649265/pexels-photo-9649265.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+        ]
+      },
+      {
+        "id": "lum-04",
+        "name": "Soleil Stackable Eternity Ring",
+        "category": "Rings",
+        "price": 999,
+        "originalPrice": 1899,
+        "discount": "47% OFF",
+        "rating": 4.7,
+        "reviews": 98,
+        "badge": "UNDER ₹1499",
+        "isWaterproof": true,
+        "material": "18K Gold PVD • Micro CZ",
+        "image": "https://images.unsplash.com/photo-1701777696655-17fb18395ccc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHw0fHxnb2xkJTIwcmluZyUyMGN1YmljJTIwemlyY29uaWElMjBwZWFybCUyMGpld2VscnklMjBwcm9kdWN0fGVufDB8fHx8MTc4OTkwNTQ2Mnww&ixlib=rb-4.1.0&q=85",
+        "gallery": [
+          "https://images.unsplash.com/photo-1701777696655-17fb18395ccc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMzl8MHwxfHNlYXJjaHw0fHxnb2xkJTIwcmluZyUyMGN1YmljJTIwemlyY29uaWElMjBwZWFybCUyMGpld2VscnklMjBwcm9kdWN0fGVufDB8fHx8MTc4OTkwNTQ2Mnww&ixlib=rb-4.1.0&q=85"
+        ]
+      }
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Ensure all buttons, interactive items, inputs, and modals contain 'data-testid' attributes (e.g., data-testid='whatsapp-checkout-btn', data-testid='product-card-lum-01').",
+    "Ensure zero-API WhatsApp checkout opens wa.me/919112299902 with pre-filled encoded shopping bag summary and total price.",
+    "Persist cart items and wishlist state seamlessly in localStorage.",
+    "Use framer-motion for smooth entrance animations and micro-interactions on mobile swipe, card tap, and bottom-sheet expansion.",
+    "Do not use transparent background on header, sticky bottom bar or modals; always use backdrop-blur glassmorphism with white opacity."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "data_testid_requirement": "All interactive elements MUST include data-testid attributes",
+    "mobile_first": "Prioritize viewport widths 375px to 430px, maintaining crisp 2-column grid and smooth touch interactions",
+    "no_transparent_header": "Header and overlays must have backdrop-blur and semi-opaque background for high contrast legibility"
+  }
+}
